@@ -6,6 +6,7 @@ provider "aws" {
 resource "aws_instance" "terraform-cloud-vm" {
   ami                    = var.ami
   instance_type          = var.instance_type
+  associate_public_ip_address = true
   count                  = 1
   user_data              = file("install.sh")
   subnet_id              = data.terraform_remote_state.vpc.outputs.subnet_id        

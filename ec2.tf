@@ -9,8 +9,8 @@ resource "aws_instance" "terraform-cloud-vm" {
   count                  = 1
   key_name               = "terraform"
   user_data              = file("install.sh")
-  subnet_id              = data.terraform_remote_state.vpc.outputs.public_subnets[0]          
-  vpc_security_group_ids = [aws_security_group.sg.id,]
+  subnet_id              = data.terraform_remote_state.vpc.outputs.subnet_id        
+  vpc_security_group_ids = [data.terraform_remote_state.vpc.outputs.security_group_id]
   tags = {
     "Name" = "terraform-cloud-vm"
   }
